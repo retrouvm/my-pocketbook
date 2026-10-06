@@ -1,0 +1,22 @@
+{
+  "name": "my-pocketbook",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "scripts"
+  ],
+  "scripts": {
+    "build": "npm run build -w @pocketbook/shared && npm run build -w @pocketbook/api && npm run build -w @pocketbook/web",
+    "build:api": "npm run build -w @pocketbook/shared && npm run build -w @pocketbook/api",
+    "build:web": "npm run build -w @pocketbook/shared && npm run build -w @pocketbook/web",
+    "dev:web": "npm run dev -w @pocketbook/web",
+    "dev:api": "npm run dev -w @pocketbook/api",
+    "typecheck": "npm run typecheck -w @pocketbook/shared && npm run typecheck -w @pocketbook/api && npm run typecheck -w @pocketbook/web",
+    "import:excel": "npm run import -w @pocketbook/scripts",
+    "check:secrets": "node scripts/check-secrets.mjs --all"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

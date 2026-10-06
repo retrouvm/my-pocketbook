@@ -1,0 +1,63 @@
+node_modules/
+dist/
+build/
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.zip
+
+# Secrets & local env (never commit real credentials)
+.env
+.env.*
+!.env.example
+!**/.env.example
+apps/web/.env.development
+*.pem
+*.p12
+*.key
+credentials.json
+service-account*.json
+secrets/
+.secrets/
+
+# Local finance data & statements
+.data/
+**/.data/
+*.xlsx
+*.xls
+*.csv
+!fixtures/sample-statement.csv
+!docs/**/*.md
+Credit Card Transactions.xlsx
+uploads/
+statements/
+
+# Terraform locals
+infra/terraform.tfvars
+*.auto.tfvars
+!infra/terraform.tfvars.example
+
+# AWS / tooling
+.aws-sam/
+infra/lambda.zip
+infra/lambda-api.zip
+.aws/
+
+# Build outputs
+apps/api/dist/
+apps/web/dist/
+packages/shared/dist/
+scripts/dist/
+.vite/
+coverage/
+*.log
+*.local
+.DS_Store
+.idea/
+.vscode/
