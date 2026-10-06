@@ -140,7 +140,7 @@ class LocalFileStore implements Store {
           i.GSI1PK === gsi1pk &&
           (!skPrefix || String(i.GSI1SK ?? "").startsWith(skPrefix)),
       )
-      .sort((a, b) => String(a.GSI1SK).localeCompare(String(b.GSI1SK)));
+      .sort((a, b) => String(a.GSI1SK ?? "").localeCompare(String(b.GSI1SK ?? "")));
   }
 
   async batchPut(items: Item[]) {

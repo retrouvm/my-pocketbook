@@ -18,7 +18,7 @@ function currentMonth() {
 
 export function App() {
   const auth = useAuth();
-  const [month, setMonth] = useState(currentMonth);
+  const [month, setMonth] = useState(currentMonth());
   const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
