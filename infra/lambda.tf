@@ -76,23 +76,23 @@ resource "aws_iam_role_policy" "api_lambda" {
 }
 
 resource "aws_lambda_function" "api" {
-  function_name = "${local.name_prefix}-api"
-  role          = aws_iam_role.api_lambda.arn
-  handler       = "handler.handler"
-  runtime       = "nodejs20.x"
-  filename      = data.archive_file.api.output_path
+  function_name    = "${local.name_prefix}-api"
+  role             = aws_iam_role.api_lambda.arn
+  handler          = "handler.handler"
+  runtime          = "nodejs20.x"
+  filename         = data.archive_file.api.output_path
   source_code_hash = data.archive_file.api.output_base64sha256
-  timeout       = 30
-  memory_size   = 256
+  timeout          = 30
+  memory_size      = 256
 
   environment {
     variables = {
-      TABLE_NAME         = aws_dynamodb_table.main.name
-      STATEMENTS_BUCKET  = aws_s3_bucket.statements.bucket
-      USER_ID            = "me"
-      LOCAL_MODE         = "false"
-      PLAID_ENV          = "sandbox"
-      PLAID_PRODUCTS     = "transactions"
+      TABLE_NAME          = aws_dynamodb_table.main.name
+      STATEMENTS_BUCKET   = aws_s3_bucket.statements.bucket
+      USER_ID             = "me"
+      LOCAL_MODE          = "false"
+      PLAID_ENV           = "sandbox"
+      PLAID_PRODUCTS      = "transactions"
       PLAID_COUNTRY_CODES = "US"
     }
   }
@@ -104,14 +104,14 @@ resource "aws_cloudwatch_log_group" "api" {
 }
 
 resource "aws_lambda_function" "statement_parser" {
-  function_name = "${local.name_prefix}-statement-parser"
-  role          = aws_iam_role.api_lambda.arn
-  handler       = "statement-parser.handler"
-  runtime       = "nodejs20.x"
-  filename      = data.archive_file.api.output_path
+  function_name    = "${local.name_prefix}-statement-parser"
+  role             = aws_iam_role.api_lambda.arn
+  handler          = "statement-parser.handler"
+  runtime          = "nodejs20.x"
+  filename         = data.archive_file.api.output_path
   source_code_hash = data.archive_file.api.output_base64sha256
-  timeout       = 60
-  memory_size   = 256
+  timeout          = 60
+  memory_size      = 256
 
   environment {
     variables = {
@@ -144,14 +144,14 @@ resource "aws_s3_bucket_notification" "statements" {
 }
 
 resource "aws_lambda_function" "plaid_sync" {
-  function_name = "${local.name_prefix}-plaid-sync"
-  role          = aws_iam_role.api_lambda.arn
-  handler       = "plaid-sync.handler"
-  runtime       = "nodejs20.x"
-  filename      = data.archive_file.api.output_path
+  function_name    = "${local.name_prefix}-plaid-sync"
+  role             = aws_iam_role.api_lambda.arn
+  handler          = "plaid-sync.handler"
+  runtime          = "nodejs20.x"
+  filename         = data.archive_file.api.output_path
   source_code_hash = data.archive_file.api.output_base64sha256
-  timeout       = 120
-  memory_size   = 256
+  timeout          = 120
+  memory_size      = 256
 
   environment {
     variables = {
